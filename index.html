@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <title>Untuk Kamu yang Hebat</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      background: white;
+      font-family: 'Comic Sans MS', 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .profile-pic {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+      margin-bottom: 20px;
+      z-index: 2;
+    }
+
+    .sky {
+      position: absolute;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .cloud, .star {
+      position: absolute;
+      animation: float 20s linear infinite;
+    }
+
+    .cloud {
+      width: 75px;
+      height: auto;
+    }
+
+    .star {
+      width: 30px;
+      height: auto;
+    }
+
+    @keyframes float {
+      from { transform: translateX(-120%); }
+      to { transform: translateX(120%); }
+    }
+
+    .balloon {
+      position: absolute;
+      width: 70px;
+      animation: dropBalloon 10s ease-in-out infinite;
+    }
+
+    @keyframes dropBalloon {
+      0% { transform: translateY(-150px) rotate(0deg); }
+      50% { transform: translateY(50vh) rotate(5deg); }
+      100% { transform: translateY(110vh) rotate(-5deg); }
+    }
+
+    .bubble {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      background: white;
+      padding: 15px;
+      border-radius: 20px;
+      box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+      max-width: 300px;
+      z-index: 2;
+    }
+
+    .bubble::after {
+      content: '';
+      position: absolute;
+      bottom: -20px;
+      left: 30px;
+      width: 0;
+      height: 0;
+      border: 10px solid transparent;
+      border-top-color: white;
+    }
+
+    .heart-text {
+      position: absolute;
+      top: 20px;
+      width: 100%;
+      text-align: center;
+      font-size: 2.5em;
+      color: hotpink;
+      text-shadow: 0 0 10px #fff;
+      animation: pulse 2s infinite;
+      z-index: 3;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.1); opacity: 0.8; }
+    }
+
+    .message {
+      background: #ffeef2;
+      padding: 25px;
+      border-radius: 15px;
+      text-align: center;
+      max-width: 400px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      z-index: 2;
+    }
+
+    .message h1 {
+      font-size: 1.8em;
+      margin-bottom: 10px;
+      color: #d63384;
+    }
+
+    .message p {
+      font-size: 1em;
+      color: #444;
+    }
+
+    @media (max-width: 768px) {
+      .profile-pic {
+        width: 120px;
+        height: 120px;
+      }
+
+      .message {
+        max-width: 90%;
+        padding: 15px;
+      }
+
+      .message h1 {
+        font-size: 1.5em;
+      }
+
+      .message p {
+        font-size: 0.95em;
+      }
+
+      .bubble {
+        bottom: 10px;
+        left: 10px;
+        padding: 10px;
+        font-size: 0.9em;
+        max-width: 80%;
+      }
+
+      .heart-text {
+        font-size: 1.8em;
+      }
+
+      .cloud {
+        width: 50px;
+      }
+
+      .balloon {
+        width: 60px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .message h1 {
+        font-size: 1.3em;
+      }
+
+      .message p {
+        font-size: 0.9em;
+      }
+
+      .heart-text {
+        font-size: 1.5em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="sky" id="sky"></div>
+  <div class="heart-text">Hai cantik 🌼</div>
+  <img src="https://imgur.com/fdqhwaK.jpg" alt="Foto" class="profile-pic">
+  <div class="message">
+    <h1>Kamu luar biasa!</h1>
+    <p>Aku tahu hari-harimu tidak mudah. Tapi kamu tetap melangkah, tetap tersenyum. Dunia boleh ribut, tapi kamu tetap bersinar. Jangan lupa istirahat dan tetap semangat ya ✨</p>
+  </div>
+  <div class="bubble">🐰: Hei, kamu... jangan nyerah ya. Aku di sini buat nemenin kamu 🤍</div>
+
+  <audio id="bgmusic" loop>
+    <source src="https://raw.githubusercontent.com/jabirfirdaus/foryou/main/ssstik.io_1745748396389.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <script>
+    window.addEventListener('load', () => {
+      const audio = document.getElementById('bgmusic');
+      audio.play().catch(() => {
+        document.body.addEventListener('click', () => {
+          audio.play();
+        }, { once: true });
+      });
+    });
+
+    const sky = document.getElementById('sky');
+
+    const clouds = [
+      'https://imgur.com/AvUOf94.png',
+      'https://imgur.com/ikx13vS.png'
+    ];
+
+    const balloons = [
+      'https://imgur.com/EOouw64.png',
+      'https://imgur.com/oDYjgeu.png'
+    ];
+
+    for (let i = 0; i < 8; i++) {
+      const img = document.createElement('img');
+      img.src = clouds[Math.floor(Math.random() * clouds.length)];
+      img.className = 'cloud';
+      img.style.top = `${Math.random() * 100}%`;
+      img.style.left = `${Math.random() * 100}%`;
+      img.style.animationDuration = `${15 + Math.random() * 10}s`;
+      sky.appendChild(img);
+    }
+
+    for (let i = 0; i < 6; i++) {
+      const img = document.createElement('img');
+      img.src = balloons[Math.floor(Math.random() * balloons.length)];
+      img.className = 'balloon';
+      img.style.left = `${Math.random() * 100}%`;
+      img.style.animationDelay = `${Math.random() * 5}s`;
+      sky.appendChild(img);
+    }
+  </script>
+</body>
+</html>
